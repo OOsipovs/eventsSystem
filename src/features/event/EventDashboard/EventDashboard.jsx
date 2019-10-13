@@ -59,6 +59,13 @@ class EventDashboard extends Component {
     events: eventsFromDashboard,
     isOpen: false
   }
+
+  handleIsOpenToggle = () => {
+    this.setState((prevState) => ({
+      isOpen: !prevState.isOpen
+    }))
+  }
+
   render() {
     const {events, isOpen} = this.state;
 
@@ -68,8 +75,8 @@ class EventDashboard extends Component {
           <EventList events={events} />
         </Grid.Column>
         <Grid.Column width={6}>
-        <Button positive content="Create Event"></Button>
-        {isOpen && <EventForm />}
+        <Button onClick={this.handleIsOpenToggle} positive content="Create Event"></Button>
+        {isOpen && <EventForm cancelFormOpen={this.handleIsOpenToggle}/>}
         </Grid.Column>
       </Grid>
     )
